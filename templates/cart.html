@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>Your Cart</header>
+
+{% if items %}
+{% for i in items %}
+<div class="cart-item">
+    <img src="{{ url_for('static', filename='images/' + i.image) }}">
+
+    <div>
+        <h4>{{ i.name }}</h4>
+        <p>₹{{ i.price }}</p>
+
+        <div class="qty">
+            <form method="POST" action="/decrease/{{ i.id }}">
+                <button>-</button>
+            </form>
+
+            <span>{{ i.qty }}</span>
+
+            <form method="POST" action="/increase/{{ i.id }}">
+                <button>+</button>
+            </form>
+        </div>
+
+        <p>Subtotal: ₹{{ i.subtotal }}</p>
+    </div>
+</div>
+{% endfor %}
+
+<h3>Total: ₹{{ total }}</h3>
+
+<a href="/checkout">
+    <button class="checkout-btn">Place Order</button>
+</a>
+
+{% else %}
+<p style="text-align:center;">Cart is empty</p>
+{% endif %}
+
+</body>
+</html>

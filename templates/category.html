@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>FlashCart</header>
+
+<nav>
+    <a href="/">All</a>
+    <a href="/category/Vegetables">Vegetables</a>
+    <a href="/category/Fruits">Fruits</a>
+    <a href="/category/Dairy">Dairy</a>
+    <a href="/cart">Cart</a>
+</nav>
+
+<div class="products">
+{% for p in products %}
+<div class="card">
+    <img src="{{ url_for('static', filename='images/' + p.image) }}">
+    <h3>{{ p.name }}</h3>
+    <p>₹{{ p.price }}</p>
+
+    <form method="POST" action="/add">
+        <input type="hidden" name="product_id" value="{{ p.id }}">
+        <button>Add</button>
+    </form>
+</div>
+{% endfor %}
+</div>
+
+</body>
+</html>
