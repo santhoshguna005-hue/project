@@ -1,74 +1,63 @@
-from flask import Flask, render_template, request, redirect, session
-import mysql.connector
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
-app.secret_key = "flashcart"
 
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="Santy$2005",
-    database="flashcart"
-)
-cursor = db.cursor(dictionary=True)
+products = [
+    {"id": 1, "name": "Apple", "price": 50, "image": "apple.jpeg"},
+    {"id": 2, "name": "Banana", "price": 30, "image": "banana.jpeg"},
+    {"id": 3, "name": "Orange", "price": 40, "image": "orange.jpeg"},
+    {"id": 4, "name": "Milk", "price": 60, "image": "milk.jpeg"},
+    {"id": 5, "name": "Butter", "price": 120, "image": "butter.jpeg"},
+]
+
+# cart = { product_id: quantity }
+cart = {}
 
 @app.route("/")
-def index():
-    cursor.execute("SELECT * FROM products")
-    products = cursor.fetchall()
-    return render_template("index.html", products=products)
+def home():
+    return render_template("index.html", products=products, cart=cart)
 
-@app.route("/category/<category>")
-def category(category):
-    cursor.execute(
-        "SELECT * FROM products WHERE category=%s", (category,)
-    )
-    products = cursor.fetchall()
-    return render_template(
-        "category.html", products=products, category=category
-    )
-
-@app.route("/add", methods=["POST"])
-def add():
-    pid = request.form["product_id"]
-    cart = session.get("cart", {})
+@app.route("/add/<int:pid>")
+def add(pid):
     cart[pid] = cart.get(pid, 0) + 1
-    session["cart"] = cart
-    return redirect(request.referrer)
+    return redirect(url_for("home"))
+
+@app.route("/remove/<int:pid>")
+def remove(pid):
+    if pid in cart:
+        cart[pid] -= 1
+        if cart[pid] <= 0:
+            del cart[pid]
+    return redirect(url_for("home"))
 
 @app.route("/cart")
-def cart():
-    cart = session.get("cart", {})
+def cart_page():
     items = []
     total = 0
 
-    for pid, qty in cart.items():
-        cursor.execute("SELECT * FROM products WHERE id=%s", (pid,))
-        p = cursor.fetchone()
-        p["qty"] = qty
-        p["subtotal"] = p["price"] * qty
-        total += p["subtotal"]
-        items.append(p)
+    for p in products:
+        if p["id"] in cart:
+            qty = cart[p["id"]]
+            subtotal = qty * p["price"]
+            total += subtotal
+            items.append({
+                "id": p["id"],
+                "name": p["name"],
+                "price": p["price"],
+                "image": p["image"],
+                "qty": qty,
+                "subtotal": subtotal
+            })
 
     return render_template("cart.html", items=items, total=total)
 
-@app.route("/increase/<pid>", methods=["POST"])
-def increase(pid):
-    session["cart"][pid] += 1
-    session.modified = True
-    return redirect("/cart")
-
-@app.route("/decrease/<pid>", methods=["POST"])
-def decrease(pid):
-    session["cart"][pid] -= 1
-    if session["cart"][pid] <= 0:
-        del session["cart"][pid]
-    session.modified = True
-    return redirect("/cart")
-
 @app.route("/checkout")
 def checkout():
-    session.clear()
+    cart.clear()
+    return redirect(url_for("success"))
+
+@app.route("/success")
+def success():
     return render_template("success.html")
 
 if __name__ == "__main__":
