@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Flashcart</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Flashcart ⚡</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="section-title">Checkout</h1>
+
+        <div class="checkout-form">
+            <h2 style="font-size: 18px; margin-bottom: 16px;">Delivery Address</h2>
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" placeholder="+91 98765 43210">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Flat / House No / Floor / Building</label>
+                <input type="text" class="form-input" placeholder="">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Area / Sector / Locality</label>
+                <input type="text" class="form-input" placeholder="">
+            </div>
+
+            <h2 style="font-size: 18px; margin: 32px 0 16px;">Payment Method</h2>
+            <div class="payment-options">
+                <div class="payment-option selected" onclick="selectPayment(this)">
+                    <div
+                        style="width: 20px; height: 20px; border-radius: 50%; border: 5px solid var(--secondary-color);">
+                    </div>
+                    <span>UPI (Google Pay, PhonePe, Paytm)</span>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>
+                    <span>Credit / Debit Card</span>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ccc;"></div>
+                    <span>Cash on Delivery</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 24px; padding: 14px; font-size: 16px;"
+                onclick="placeOrder()">
+                Place Order
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-option').forEach(el => {
+                el.classList.remove('selected');
+                el.querySelector('div').style.border = '1px solid #ccc';
+            });
+            element.classList.add('selected');
+            element.querySelector('div').style.border = '5px solid var(--secondary-color)';
+        }
+
+        function placeOrder() {
+            alert('Order Placed Successfully! 🚀');
+            localStorage.removeItem('flashcart_cart');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

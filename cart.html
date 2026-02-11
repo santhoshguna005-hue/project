@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Flashcart</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Flashcart ⚡</a>
+        </div>
+    </header>
+
+    <main class="container cart-page">
+        <h1 class="section-title">Your Cart</h1>
+        <div id="cart-items-container">
+            <!-- Cart Items by JS -->
+            <p style="text-align: center; color: #666; margin-top: 40px;">Your cart is empty.</p>
+        </div>
+
+        <div id="bill-section" class="bill-details" style="display: none;">
+            <div class="bill-row">
+                <span>Item Total</span>
+                <span id="bill-item-total">₹0</span>
+            </div>
+            <div class="bill-row">
+                <span>Delivery Fee</span>
+                <span>₹15</span>
+            </div>
+            <div class="bill-row">
+                <span>Handling Charge</span>
+                <span>₹2</span>
+            </div>
+            <div class="bill-row bill-total">
+                <span>Grand Total</span>
+                <span id="bill-grand-total">₹0</span>
+            </div>
+        </div>
+
+        <div style="height: 100px;"></div> <!-- Spacer for fixed footer -->
+    </main>
+
+    <div class="sticky-footer" id="cart-footer" style="display: none;">
+        <div>
+            <div style="font-size: 12px; font-weight: 600;">Total</div>
+            <div style="font-size: 18px; font-weight: 800;" id="footer-total">₹0</div>
+        </div>
+        <a href="checkout.html" class="btn btn-primary">Proceed to Checkout -></a>
+    </div>
+</body>
+
+</html>

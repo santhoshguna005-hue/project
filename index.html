@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcart - Quick Commerce</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Flashcart ⚡</a>
+
+            <div class="location-pill">
+                <strong>Delivery in 10 mins</strong>
+                <span>Home - 123, Green Park...</span>
+            </div>
+
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search 'milk', 'bread', 'chips'...">
+            </div>
+
+            <a href="cart.html" class="cart-btn" id="cart-btn">
+                <span>🛒</span>
+                <span id="cart-count">My Cart</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-banner">
+                <h1 class="hero-title">Groceries in 10 Minutes</h1>
+                <p class="hero-subtitle">Fresh produce, daily essentials & more delivered to your doorstep.</p>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <div class="category-item">
+                <div class="cat-icon">🥦</div>
+                <span class="cat-name">Vegetables</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🍞</div>
+                <span class="cat-name">Bakery</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🥛</div>
+                <span class="cat-name">Dairy</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🍫</div>
+                <span class="cat-name">Snacks</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🧴</div>
+                <span class="cat-name">Personal Care</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🧼</div>
+                <span class="cat-name">Cleaning</span>
+            </div>
+            <div class="category-item">
+                <div class="cat-icon">🥤</div>
+                <span class="cat-name">Drinks</span>
+            </div>
+        </section>
+
+        <section id="products-section">
+            <h2 class="section-title">Best Sellers</h2>
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be injected by JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Partner with us</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <p>© 2026 Flashcart Technologies Pvt. Ltd.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
